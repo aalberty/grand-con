@@ -1,15 +1,15 @@
 const axios = require('axios');
 
 const getPlayToWinEvents = () => {
-    //TODO: refactor for change from HTTP to axios
-    const params = {
-        hostname: HOSTNAME,
-        path: "/api/playtowin",
+    let data = '';
+    //TODO: Check docs - need to specify group as param?
+    axios({
         method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
+        url: "https://tabletop.events/api/playtowin"
+    })
+        .then(function (response) {
+            console.log("playToWin response: ", response);
+        });
 
     const request = http.request(params, (response) => {
         console.log("getPlayToWin response: ", response);
