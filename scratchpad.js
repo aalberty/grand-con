@@ -1,19 +1,26 @@
 const axios = require('axios');
 
-const getPlayToWinEvents = () => {
-    let data = '';
-    //TODO: Check docs - need to specify group as param?
-    axios({
+const getPlayToWinEvents = async (sessionId) => {
+    const response = await axios({
         method: "GET",
-        url: "https://tabletop.events/api/playtowin"
-    })
-        .then(function (response) {
-            console.log("playToWin response: ", response);
-        });
-
-    const request = http.request(params, (response) => {
-        console.log("getPlayToWin response: ", response);
+        url: "https://tabletop.events/api/playtowin",
+        headers: {
+            "session_id": sessionId
+        }
     });
+    return response;
+}
+
+//TODO: handling paginated responses
+const getConventions = async (sessionId) => {
+    const response = await axios({
+        method: "GET",
+        url: "https://tabletop.events/api/convention",
+        headers: {
+            session_id: sessionId
+        }
+    });
+    return response;
 }
 
 const openSession = (username, password, apiKey) => {
@@ -43,3 +50,10 @@ const closeSession = (sessionId, creds) => {
             console.log("closeSession response: ", response);
         });
 }
+
+
+var grandcon = conventions.items.filter((c)=>{
+    if (c.email_address == "info@grand-con.com"){
+        return c;
+    }
+})
