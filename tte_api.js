@@ -1,9 +1,6 @@
 const axios = require('axios');
 var activeSession = "";
 
-
-//TODO: test this module
-
 const get = async (endpoint, params) => {
     if (activeSession == "") {
         console.warn("Please set an active session ID before attempting API calls.");
@@ -64,3 +61,35 @@ const _request = async (endpoint, method, params, page) => {
 const setSessionId = (sessionId) => {
     activeSession = sessionId;
 }
+
+
+//TODO: Refactor to set activeSession instead of logging response
+const openSession = (username, password, apiKey) => {
+    let data = '';
+    
+    axios({
+        method: "POST",
+        url: "https://tabletop.events/api/session",
+        data: {
+            username: username,
+            password: password,
+            api_key_id: apiKey
+        }
+    })
+        .then(function (response) {
+            console.log("openSession response: ", response);
+        });
+}
+
+const closeSession = (creds) => {
+    axios({
+        method: "DELETE",
+        url: "https://tabletop.events/api/session/" + activeSession,
+        data: creds
+    })
+        .then(function (response) {
+            console.log("closeSession response: ", response);
+        });
+}
+
+module.exports = { get, openSession, closeSession, setSessionId};
