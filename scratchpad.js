@@ -275,4 +275,4 @@ const closeSession = (creds) => {
 }
 
 
-setSessionId("AEDFF13A-6225-11EE-968B-B85416776BA3");
+//setSessionId("<active_session_id>");

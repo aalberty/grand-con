@@ -1,8 +1,6 @@
 const api = require("./tte_api.js");
 
-//TODO: remove static session id after testing
-api.setSessionId("AEDFF13A-6225-11EE-968B-B85416776BA3");
-
+//api.setSessionId("<active_session_id>")
 
 const getGCPtwData = () => {
     var params = [
